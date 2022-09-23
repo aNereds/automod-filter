@@ -1,0 +1,25 @@
+{
+  "name": "automod-filter",
+  "version": "1.0.0",
+  "description": "Bad word filter.",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/idaspin/automod-filter.git"
+  },
+  "keywords": [ "bad","word","words","profanity","filter","blacklist","black","list","swear","english","russian","мат","фильтр" ],
+  "author": "idaspin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/idaspin/automod-filter/issues"
+  },
+  "homepage": "https://github.com/idaspin/automod-filter#readme",
+  "devDependencies": {
+    "typescript": "^4.8.3"
+  }
+}
