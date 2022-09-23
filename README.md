@@ -13,7 +13,7 @@ A javascript filter for badwords
 ```js
 const { Automod } = require('automod-filter');
 
-console.log(Automod.filter("What the fuck is going on here? Whore", { langs: [ Lang.ENGLISH ] })) // What the ████ is going on here? █████
+console.log(Automod.filter("What the fuck is going on here? Whore" })) // What the ████ is going on here? █████
 ```
 
 ### Options
