@@ -2,7 +2,7 @@
 
 A javascript filter for badwords
 
-[![Build Status](https://travis-ci.com/idaspin/automod-filter.svg?branch=master)](https://travis-ci.com/idaspin/automod-filter)
+[![Npm version](https://img.shields.io/npm/v/automod-filter.svg)](https://npmjs.org/package/automod-filter)
 
 ## Installation
 
