@@ -1,12 +1,12 @@
-import ru from "../data/ru.json";
-import en from "../data/en.json";
-import lv from "../data/lv.json";
-import { AutomodOptions, AutomodReply } from "../interfaces";
+import ru from '../data/ru.json';
+import en from '../data/en.json';
+import lv from '../data/lv.json';
+import { AutomodOptions, AutomodReply } from '../interfaces';
 
 export enum Lang {
-  ENGLISH,
-  RUSSIAN,
-  LATVIAN,
+  ENGLISH = 'en',
+  RUSSIAN = 'ru',
+  LATVIAN = 'lv',
 }
 export enum Method {
   CLASSIC,
@@ -16,7 +16,7 @@ export enum Method {
 export class Filter {
   readonly defaultOpts: AutomodOptions = {
     langs: [Lang.ENGLISH],
-    replacer: "█",
+    replacer: '█',
     method: Method.CLASSIC,
   };
   // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
@@ -24,20 +24,20 @@ export class Filter {
 
   constructor() {
     this.methods
-      .set(Method.CLASSIC, (word: string, langs: Lang[]): boolean => {
+      .set(Method.CLASSIC, (word: string, langs: Lang[]): [string, boolean] => {
         if (
           langs.includes(Lang.RUSSIAN) &&
           !ru.exclude.includes(word) &&
           ru.include.filter((w) => word === w || word.includes(w)).length != 0
         ) {
-          return true;
+          return [Lang.RUSSIAN, true];
         }
         if (
           langs.includes(Lang.ENGLISH) &&
           !en.exclude.includes(word) &&
           en.include.filter((w) => word === w || word.includes(w)).length != 0
         ) {
-          return true;
+          return [Lang.ENGLISH, true];
         }
 
         if (
@@ -45,17 +45,17 @@ export class Filter {
           !lv.exclude.includes(word) &&
           lv.include.filter((w) => word === w || word.includes(w)).length != 0
         ) {
-          return true;
+          return [Lang.LATVIAN, true];
         }
-        return false;
+        return ['', false];
       })
-      .set(Method.STRICT, (word: string, langs: Lang[]): boolean => {
+      .set(Method.STRICT, (word: string, langs: Lang[]): [string, boolean] => {
         const results: boolean[] = [];
         if (langs.includes(Lang.RUSSIAN) && !ru.exclude.includes(word)) {
           if (
             ru.include.filter((w) => word === w || word.includes(w)).length != 0
           ) {
-            return true;
+            return [Lang.RUSSIAN, true];
           }
           results.push(this.found(word, ru));
         }
@@ -63,7 +63,7 @@ export class Filter {
           if (
             en.include.filter((w) => word === w || word.includes(w)).length != 0
           ) {
-            return true;
+            return [Lang.ENGLISH, true];
           }
           results.push(this.found(word, en));
         }
@@ -71,11 +71,12 @@ export class Filter {
           if (
             lv.include.filter((w) => word === w || word.includes(w)).length != 0
           ) {
-            return true;
+            return [Lang.LATVIAN, true];
           }
           results.push(this.found(word, lv));
         }
-        return results.includes(true);
+
+        return ['', results.includes(true)];
       });
   }
 
@@ -85,7 +86,7 @@ export class Filter {
    * @returns { AutomodReply } Output data { clean: boolean, output: string, ... }
    */
   filter(
-    string: string = "",
+    string: string = '',
     options: AutomodOptions = this.defaultOpts,
   ): AutomodReply {
     const { langs, replacer, method } = { ...this.defaultOpts, ...options };
@@ -94,6 +95,7 @@ export class Filter {
       input: string,
       output: string,
       matches: [],
+      involvedLanguages: [],
       clean: true,
     };
     reply = this.clean(reply, { langs, replacer, method });
@@ -104,15 +106,23 @@ export class Filter {
   private clean(reply: AutomodReply, options: AutomodOptions): AutomodReply {
     const isProfane = this.methods.get(options.method);
     for (const word of reply.output.split(/ /)) {
-      if (isProfane ? isProfane(word, options.langs) : false) {
+      const [language, result] = isProfane
+        ? isProfane(word, options.langs)
+        : ['', false];
+      if (result) {
         reply.matches.push(word);
         reply.clean = false;
         reply.output = reply.output.replace(
           word,
           options.replacer.repeat(word.length),
         );
+
+        if (language && !reply.involvedLanguages.includes(language)) {
+          reply.involvedLanguages.push(language);
+        }
       }
     }
+
     return reply;
   }
 
