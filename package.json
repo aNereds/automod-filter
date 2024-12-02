@@ -1,5 +1,5 @@
 {
-  "name": "automod-filter",
+  "name": "swear-filter",
   "version": "1.0.0",
   "description": "Bad word filter.",
   "main": "lib/index.js",
