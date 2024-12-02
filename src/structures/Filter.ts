@@ -1,10 +1,12 @@
 import ru from "../data/ru.json";
 import en from "../data/en.json";
+import lv from "../data/lv.json";
 import { AutomodOptions, AutomodReply } from "../interfaces";
 
 export enum Lang {
   ENGLISH,
   RUSSIAN,
+  LATVIAN,
 }
 export enum Method {
   CLASSIC,
@@ -17,6 +19,7 @@ export class Filter {
     replacer: "█",
     method: Method.CLASSIC,
   };
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   private readonly methods: Map<Method, Function> = new Map();
 
   constructor() {
@@ -33,6 +36,14 @@ export class Filter {
           langs.includes(Lang.ENGLISH) &&
           !en.exclude.includes(word) &&
           en.include.filter((w) => word === w || word.includes(w)).length != 0
+        ) {
+          return true;
+        }
+
+        if (
+          langs.includes(Lang.LATVIAN) &&
+          !lv.exclude.includes(word) &&
+          lv.include.filter((w) => word === w || word.includes(w)).length != 0
         ) {
           return true;
         }
@@ -55,6 +66,14 @@ export class Filter {
             return true;
           }
           results.push(this.found(word, en));
+        }
+        if (langs.includes(Lang.LATVIAN) && !lv.exclude.includes(word)) {
+          if (
+            lv.include.filter((w) => word === w || word.includes(w)).length != 0
+          ) {
+            return true;
+          }
+          results.push(this.found(word, lv));
         }
         return results.includes(true);
       });
