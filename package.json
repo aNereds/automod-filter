@@ -12,10 +12,28 @@
     "type": "git",
     "url": "git+https://github.com/idaspin/automod-filter.git"
   },
-  "keywords": [ "bad","word","words","profanity","filter","blacklist","black","list","swear","english","мат","фильтр" ],
+  "keywords": [
+    "bad",
+    "word",
+    "words",
+    "profanity",
+    "filter",
+    "blacklist",
+    "black",
+    "list",
+    "swear",
+    "english",
+    "мат",
+    "фильтр"
+  ],
   "author": "aNereds",
   "license": "ISC",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.17.0",
+    "@typescript-eslint/parser": "^8.17.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "ts-node": "^10.9.2",
     "typescript": "^4.8.3"
   }
 }
