@@ -40,8 +40,3 @@ console.log(Automod.filter("d@mn а я fuck не понял 6ля что вы sh
 - Regex search
 - Fill English replacers
 - URL parser
-
-### Community
-
-- Found a bug: [submit an issue.](https://github.com/iamnotacoder-djs/automod-filter/issues/new)
-- Discussion and help about automod-filter: [🇷🇺 Discord Server](https://discord.gg/YeqrTtpmaH)

@@ -12,13 +12,9 @@
     "type": "git",
     "url": "git+https://github.com/idaspin/automod-filter.git"
   },
-  "keywords": [ "bad","word","words","profanity","filter","blacklist","black","list","swear","english","russian","мат","фильтр" ],
-  "author": "idaspin",
+  "keywords": [ "bad","word","words","profanity","filter","blacklist","black","list","swear","english","мат","фильтр" ],
+  "author": "aNereds",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/idaspin/automod-filter/issues"
-  },
-  "homepage": "https://github.com/idaspin/automod-filter#readme",
   "devDependencies": {
     "typescript": "^4.8.3"
   }
