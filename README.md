@@ -6,14 +6,14 @@ A javascript filter for badwords
 
 ## Installation
 
-    npm install automod-filter --save
+    npm i @andzh777/swear-filter
 
 ## Usage
 
 ```js
 const { Automod } = require('automod-filter');
 
-console.log(Automod.filter("What the fuck is going on here? Whore" })) // What the ████ is going on here? █████
+console.log(Automod.filter("What the fuck is going on here? Whore" })); // What the ████ is going on here? █████
 ```
 
 ### Options

@@ -1,6 +1,6 @@
 {
   "name": "@andzh777/swear-filter",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Bad word filter.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/idaspin/automod-filter.git"
+    "url": "git+https://github.com/aNereds/swear-filter.git"
   },
   "keywords": [
     "bad",
