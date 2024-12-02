@@ -1,5 +1,5 @@
 {
-  "name": "swear-filter",
+  "name": "@andzh777/swear-filter",
   "version": "1.0.0",
   "description": "Bad word filter.",
   "main": "lib/index.js",
